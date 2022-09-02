@@ -8,4 +8,21 @@ const toggle = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
 
-//Build out functions 
+//Build out functions
+
+function togglePlay() {
+  video.paused ? video.play() : video.pause();
+
+}
+
+function updateButton(){
+  const icon = this.paused ? '►' : '❚ ❚';  // this is bound to video element itself!!!
+  toggle.textContent = icon;
+}
+
+// Hook up the event listeners => (update the button while playing or pausing the video)
+
+video.addEventListener("click", togglePlay);
+video.addEventListener("play", updateButton);
+video.addEventListener("pause", updateButton);
+toggle.addEventListener("click", togglePlay);
