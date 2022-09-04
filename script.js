@@ -8,6 +8,7 @@ const toggle = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
 
+
 //Build out functions
 
 function togglePlay() {
@@ -15,14 +16,23 @@ function togglePlay() {
 
 }
 
-function updateButton(){
-  const icon = this.paused ? '►' : '❚ ❚';  // this is bound to video element itself!!!
+function updateButton() {
+  const icon = this.paused ? '►' : '❚ ❚'; // this is bound to video element itself!!!
   toggle.textContent = icon;
 }
 
+function skip() {
+  video.currentTime += parseFloat(this.dataset.skip);
+}
+
+
 // Hook up the event listeners => (update the button while playing or pausing the video)
 
-video.addEventListener("click", togglePlay);
-video.addEventListener("play", updateButton);
-video.addEventListener("pause", updateButton);
-toggle.addEventListener("click", togglePlay);
+video.addEventListener('click', togglePlay);
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
+
+
+toggle.addEventListener('click', togglePlay);
+
+skipButtons.forEach(button => button.addEventListener('click', skip));
